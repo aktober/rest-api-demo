@@ -13,3 +13,7 @@
 `[PUT] /api/posts/<pk>/` - post update (require: token)
 
 `[DELETE] /api/posts/<pk>/` - delete post (require: token)
+
+`[GET] /api/posts/<pk>/like/` - like post (require: token)
+
+`[GET] /api/posts/<pk>/unlike/` - unlike post (require: token)
