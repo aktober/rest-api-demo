@@ -30,13 +30,8 @@ class ListsPostsAPI(generics.ListCreateAPIView):
         user = self.request.user
         return Post.objects.filter(author=user)
 
-    def post(self, request, *args, **kwargs):
-        data = request.data.dict()
-        data['author'] = request.user.id
-        serializer = PostSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
 
 class RUDPostAPI(generics.RetrieveUpdateDestroyAPIView):

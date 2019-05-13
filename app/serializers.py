@@ -10,9 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
+    author = serializers.ReadOnlyField(source='author.username')
+
     class Meta:
         model = Post
         fields = ['id', 'title', 'text', 'liked', 'unliked', 'total_liked','created_at', 'author']
-
-    def create(self, validated_data):
-        return Post.objects.create(**validated_data)
